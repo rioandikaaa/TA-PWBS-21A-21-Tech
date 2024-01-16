@@ -24,6 +24,14 @@ class kia extends Controller
    
    return response(["kia" =>$result],http_response_code());
 }
+
+    //pencarian data
+    function searchController($keyword)
+    {
+       $result = $this->model->searchData
+       ($keyword);
+       return response(["kia" =>$result],http_response_code());
+    }
 }
 
 
