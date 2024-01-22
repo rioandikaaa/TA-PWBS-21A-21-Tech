@@ -16,3 +16,5 @@ Route::get('/data_anak/search/{keyword}', [KiaController::class, 'search']);
 Route::get('/data_anak/show/{nomer_antri}', [KiaController::class, 'show']);
 Route::delete('/data_anak/destroy/{nomer_antri}', [KiaController::class, 'destroy']);
 Route::post('/data_anak/store', [KiaController::class, 'store']);
+Route::put('/data_anak/update/{nomer_antri}', [KiaController::class, 'update']);
+Route::post('/data_anak', 'KiaController@store');
