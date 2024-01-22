@@ -44,5 +44,27 @@ class Mkia extends Model
     {
         return self::destroy($nomer_antri);
     }
+
+        // Fungsi untuk menyimpan data anak baru
+        public function saveData($nama_ibu, $nama_anak, $alamat, $status_anak, $tinggi_badan, $berat_badan)
+        {
+            return self::create([
+                'nama_ibu' => $nama_ibu,
+                'nama_anak' => $nama_anak,
+                'alamat' => $alamat,
+                'status_anak' => $status_anak,
+                'tinggi_badan' => $tinggi_badan,
+                'berat_badan' => $berat_badan,
+            ]);
+        }
+    
+        // Fungsi untuk memeriksa apakah data anak dapat diupdate
+        public function checkUpdateData($nama_anak, $nomer_antri)
+        {
+            return self::where('nama_anak', $nama_anak)
+                ->where('nomer_antri', '!=', $nomer_antri)
+                ->count();
+        }
+    
     
 }
