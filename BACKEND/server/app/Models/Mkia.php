@@ -1,26 +1,29 @@
 <?php
+// app/Models/Mkia.php
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\DB;
 
-
-class Mmahasiswa extends Model
+class Mkia extends Model
 {
-   //use HasFactory;
-   function getData()
-   {
-        
-        $query = DB::table('tb_kia')
-        ->select("id as nomer antri","nama ibu as nama_ibu","nama anak as nama_anak","alamat as alamat",
-        "status as status_anak" ,"tinggi as tinggi_badan","berat as berat_badan")
-        ->orderBy("id")
-         ->get();
+    protected $table = 'data_anak';
+    protected $primaryKey = 'nomer_antri';
+    public $timestamps = false;
 
-        
-        return $query;
-   }
+    protected $fillable = [
+        'nama_ibu', 'nama_anak', 'alamat', 'status_anak', 'tinggi_badan', 'berat_badan'
+    ];
+    protected $casts = [
+        'tinggi_badan' => 'decimal:2', // Menentukan bahwa tipe data tinggi_badan adalah decimal dengan 2 digit di belakang koma
+        'berat_badan' => 'decimal:2', // Menentukan bahwa tipe data berat_badan adalah decimal dengan 2 digit di belakang koma
+    ];
 
+    // Fungsi untuk mendapatkan semua data anak
+    public function getData()
+    {
+        return self::all();
+    }
+
+    
 }
