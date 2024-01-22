@@ -125,5 +125,13 @@ class KiaController extends Controller
         return response(["status" => $status, "message" => $message], 200);
     }
 
+
+    // Fungsi untuk menghasilkan nomer_antri unik
+    private function generateNomerAntri()
+    {
+        // Logika untuk menghasilkan nomer_antri unik, misalnya menggunakan timestamp atau logika lainnya.
+        return time();
+    }
+
     
 }
