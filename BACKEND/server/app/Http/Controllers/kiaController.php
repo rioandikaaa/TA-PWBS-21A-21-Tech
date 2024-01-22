@@ -48,6 +48,47 @@ class KiaController extends Controller
     return response(["status" => $status, "message" => $message], 200);
 }
 
+    // Fungsi untuk menyimpan data anak baru
+    public function store(Request $request)
+{
+    try {
+        // Validasi input di sini jika diperlukan
+
+        $data = [
+            "nama_ibu" => $request->input('nama_ibu'),
+            "nama_anak" => $request->input('nama_anak'),
+            "alamat" => $request->input('alamat'),
+            "status_anak" => $request->input('status_anak'),
+            "tinggi_badan" => $request->input('tinggi_badan'),
+            "berat_badan" => $request->input('berat_badan'),
+        ];
+
+        // Anda bisa menggunakan generateNomerAntri atau cara lain untuk mendapatkan ID unik
+        $nomer_antri = $this->generateNomerAntri();
+
+        // Periksa keberadaan data berdasarkan nomer_antri
+        if ($this->model->detailData($nomer_antri)) {
+            return response(["status" => 0, "message" => "Data Gagal Disimpan! (ID Sudah Ada)"], 422);
+        }
+
+        // Simpan data ke dalam database
+        $this->model->saveData(
+            $data["nama_ibu"],
+            $data["nama_anak"],
+            $data["alamat"],
+            $data["status_anak"],
+            $data["tinggi_badan"],
+            $data["berat_badan"]
+        );
+
+        return response(["status" => 1, "message" => "Data Berhasil Disimpan"], 200);
+
+    } catch (\Exception $e) {
+        // Tangani kesalahan dan kirimkan HTTP response yang sesuai
+        return response(["status" => 0, "message" => "Error: " . $e->getMessage()], 500);
+    }
+}
+
 
     
 }
