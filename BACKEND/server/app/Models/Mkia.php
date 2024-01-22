@@ -65,6 +65,20 @@ class Mkia extends Model
                 ->where('nomer_antri', '!=', $nomer_antri)
                 ->count();
         }
+
+            // Fungsi untuk mengupdate data anak berdasarkan nomer antri
+    public function updateData($nama_ibu, $nama_anak, $alamat, $status_anak, $tinggi_badan, $berat_badan, $nomer_antri)
+    {
+        return self::where('nomer_antri', $nomer_antri)
+            ->update([
+                'nama_ibu' => $nama_ibu,
+                'nama_anak' => $nama_anak,
+                'alamat' => $alamat,
+                'status_anak' => $status_anak,
+                'tinggi_badan' => $tinggi_badan,
+                'berat_badan' => $berat_badan,
+            ]);
+    }
     
     
 }
