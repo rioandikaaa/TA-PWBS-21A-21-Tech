@@ -88,7 +88,42 @@ class KiaController extends Controller
         return response(["status" => 0, "message" => "Error: " . $e->getMessage()], 500);
     }
 }
-
+    // Fungsi untuk mengupdate data anak berdasarkan nomer antri
+    public function update(Request $req, $nomer_antri)
+    {
+        // Validasi data
+        $req->validate([
+            'nama_ibu' => 'required',
+            'nama_anak' => 'required',
+            'alamat' => 'required',
+            'status_anak' => 'required',
+            'tinggi_badan' => 'required|numeric',
+            'berat_badan' => 'required|numeric',
+        ]);
+    
+        // Ambil data input dari request
+        $data = [
+            "nama_ibu" => $req->nama_ibu,
+            "nama_anak" => $req->nama_anak,
+            "alamat" => $req->alamat,
+            "status_anak" => $req->status_anak,
+            "tinggi_badan" => $req->tinggi_badan,
+            "berat_badan" => $req->berat_badan,
+        ];
+    
+        // Panggil metode updateData dari model
+        $result = $this->model->updateData($data, $nomer_antri);
+    
+        if ($result) {
+            $status = 1;
+            $message = "Data Berhasil Diubah";
+        } else {
+            $status = 0;
+            $message = "Data Gagal Diubah";
+        }
+    
+        return response(["status" => $status, "message" => $message], 200);
+    }
 
     
 }
