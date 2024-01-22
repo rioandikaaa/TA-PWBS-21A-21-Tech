@@ -25,5 +25,24 @@ class Mkia extends Model
         return self::all();
     }
 
+    // Fungsi untuk mencari data anak berdasarkan keyword
+    public function searchData($keyword)
+    {
+        return self::where('nama_anak', 'LIKE', "%$keyword%")
+            ->orWhere('nama_ibu', 'LIKE', "%$keyword%")
+            ->get();
+    }
+
+    // Fungsi untuk mendapatkan detail data anak berdasarkan nomer antri
+    public function detailData($nomer_antri)
+    {
+        return self::find($nomer_antri);
+    }
+
+    // Fungsi untuk menghapus data anak berdasarkan nomer antri
+    public function deleteData($nomer_antri)
+    {
+        return self::destroy($nomer_antri);
+    }
     
 }
