@@ -25,6 +25,7 @@ class Mkia extends Model
         return self::all();
     }
 
+<<<<<<< HEAD
     // Fungsi untuk mencari data anak berdasarkan keyword
     public function searchData($keyword)
     {
@@ -82,3 +83,7 @@ class Mkia extends Model
     
     
 }
+=======
+   
+}
+>>>>>>> origin/master-rio
